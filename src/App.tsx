@@ -1,131 +1,149 @@
 import './App.css';
-import { useState } from "react";
+import { useState } from 'react';
+import CalcButton from './components/CalcButton.tsx';
 
-
-
-
-
-
-
+// -----------------------------------------
 
 
 
 function App() {
+  
+  // 状態管理 電卓の計算結果の現在値/更新値
+  const [number,setnumber] = useState<string>('');
+  
+  // 定数keysを設定し中に要素(id)を設定する(引数で型も書く事)
+  const keys : {id:string,orange?:boolean}[] = [
+    {id: '7'},
+    {id: '8'},
+    {id: '9'},
+    {id: '÷', orange:true},
+        { id: '4' },
+    { id: '5' },
+    { id: '6' },
+    { id: '×', orange: true },
+    { id: '1' },
+    { id: '2' },
+    { id: '3' },
+    { id: '-', orange: true },
+    { id: '0' },
+    { id: 'AC' },
+    { id: '=' },
+    { id: '+', orange: true },
+  ]
 
-  const [number,setnumber] = useState('')
+  // 定数handleclickを設定し、ボタンが押された時の条件分岐を設定する
+  const handleclick = (e: React.MouseEvent<HTMLButtonElement>)=> {
+    const value_inner = e.currentTarget.innerText;
 
-  const handleclick = (e:any)=> {
-    // 定数で対象要素の中身を指定できるようにする
-    const value_inner = e.target.innerText
-    
-    // 定数内に 条件分岐でAC内の処理と ＝の処理 エラーの処理(tryとcatchはセットで使う)　もしくはそれ以外は現在値の対象を表示させる設定をする  const content = ()=> 
-    
     if (value_inner === 'AC') {
-      setnumber('')
-    } else if(value_inner === '=') {
-      setnumber(eval(number.replaceAll('×','*').replaceAll('÷','/')).toString())
+      setnumber('');
+    } else if (value_inner === '=') {
+      setnumber(eval(number.replaceAll('×','*').replaceAll('÷','/').toString()))
     } else {
-      setnumber(value_inner + number)
+      // setnumber(value_inner + number);
+      setnumber( number + value_inner);
     }
 
-    }
-    
+  }
 
-    
+  // input設定とkeysを配列にし他コンポーネントに要素を渡す
 
-
-    return (
-  
-      <div className='bg-black w-120 text-[44px] mt-[20px] mx-auto mb-0 p-[30px] rounded-[20px]'>
-        <input placeholder='0' type='text' value={number}  className='placeholder:text-white text-white text-right text-[94px] pr-4 w-full'></input>
-        <div className='text-white grid grid-cols-4 gap-[30px] text-center [&>div]:py-2 [&>div]:bg-[oklch(0.38_0_0)] '>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full '>7</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full'>8</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full'>9</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full !bg-orange-400'>÷</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full'>4</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full'>5</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full'>6</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full !bg-orange-400'>×</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full'>1</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full'>2</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full'>3</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full !bg-orange-400'>-</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full'>0</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full'>AC</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full'>=</button>
-          <button onClick={handleclick} className='bg-gray-500 rounded-full !bg-orange-400'>+</button>
-        </div>
-      </div>
-    )
-  
-
-  
-
+return (
+  <div className="bg-black w-120 text-[44px] mt-[20px] mx-auto mb-0 p-[30px] rounded-[20px]">
+    <input
+      placeholder="0"
+      type="text"
+      value={number}
+      className="placeholder:text-white text-white text-right text-[94px] pr-4 w-full"
+    />
+    <div className="text-white grid grid-cols-4 gap-[30px] text-center">
+      {keys.map((key) => (
+        <CalcButton
+          key={key.id}
+          id={key.id}
+          onC={handleclick}
+          orange={key.orange}
+        />
+      ))}
+    </div>
+  </div>
+)
 
 }
 
 
+export default App;
+// ---------------------------------------------------------------------------------------
 
 
-  
+// import './App.css';
+// import { useState } from 'react';
+// import CalcButton from './components/CalcButton.tsx';
+
+// // -----------------------------------------
 
 
-
-
-
-
-
-// --------------------------------------------------------------------------------------------------------------------------------------------------
 
 // function App() {
+  
+//   // 状態管理 電卓の計算結果の現在値/更新値
+//   const [number, setnumber] = useState<string>('');
+  
+//   // 定数keysを設定し中に要素(label)を設定する(引数で型も書く事)
+//   const KEYS: { label: string; orange?: boolean }[] = [
+//     { label: '7' },
+//     { label: '8' },
+//     { label: '9' },
+//     { label: '÷', orange: true },
+//     { label: '4' },
+//     { label: '5' },
+//     { label: '6' },
+//     { label: '×', orange: true },
+//     { label: '1' },
+//     { label: '2' },
+//     { label: '3' },
+//     { label: '-', orange: true },
+//     { label: '0' },
+//     { label: 'AC' },
+//     { label: '=' },
+//     { label: '+', orange: true },
+//   ];
 
-
-// const [number,setnumber] = useState('');
-
-// const handleclick = (e)=> {
-
-//   // 定数で対象要素の中身を指定できるようにする
-//   const value = e.target.innerText;
-
-//   // 定数内に 条件分岐でAC内の処理と ＝の処理 エラーの処理(tryとcatchはセットで使う)　もしくはそれ以外は現在値の対象を表示させる設定をする  const content = ()=> 
-//   if (value === 'AC') {
-//     setnumber('')
-//   } else if(value === '=') {
-//     try {
-//       setnumber(eval(number.replaceAll('÷','/').replaceAll('×','*')).toString());
-//     }    catch (e) {
-//       setnumber('error')
+//   // 定数handleclickを設定し、ボタンが押された時の条件分岐を設定する
+//   const handleclick = (e: React.MouseEvent<HTMLButtonElement>) => {
+//     const value_inner = e.currentTarget.innerText;
+//     if (value_inner === 'AC') {
+//       setnumber('');
+//     } else if (value_inner === '=') {
+//       setnumber(
+//         eval(number.replaceAll('×', '*').replaceAll('÷', '/')).toString()
+//       );
+//     } else {
+//       setnumber(value_inner + number);
 //     }
-//   } else {
-//     setnumber(number + value);
-//   }
+//   };
 
-// };
-
+//   // input設定とkeysを配列にし他コンポーネントに要素を渡す
 //   return (
 //     <div className='bg-black w-120 text-[44px] mt-[20px] mx-auto mb-0 p-[30px] rounded-[20px]'>
-//       <input type='text' value={number} className='text-white text-right text-[94px] pr-4 w-full'></input>
+//       <input
+//         placeholder='0'
+//         type='text'
+//         value={number}
+//         className='placeholder:text-white text-white text-right text-[94px] pr-4 w-full'
+//       ></input>
 //       <div className='text-white grid grid-cols-4 gap-[30px] text-center [&>div]:py-2 [&>div]:bg-[oklch(0.38_0_0)] '>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full '>7</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full'>8</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full'>9</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full !bg-orange-400'>÷</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full'>4</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full'>5</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full'>6</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full !bg-orange-400'>×</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full'>1</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full'>2</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full'>3</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full !bg-orange-400'>-</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full'>0</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full'>AC</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full'>=</button>
-//         <button onClick={handleclick} className='bg-gray-500 rounded-full !bg-orange-400'>+</button>
+//         {KEYS.map((key) => (
+//           <CalcButton
+//             key={key.label}
+//             label={key.label}
+//             onClick={handleclick}
+//             orange={key.orange}
+//           />
+//         ))}
 //       </div>
 //     </div>
 //   );
 // }
 
-export default App;
+// export default App;
