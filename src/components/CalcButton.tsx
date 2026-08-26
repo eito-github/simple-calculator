@@ -17,6 +17,7 @@ export default function CalcButton({ id, onC, orange }: CalcButtonprops) {
   );
 }
 
+
 // -----------------------------------------------------
 
 // // 型定義
