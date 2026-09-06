@@ -74,22 +74,6 @@ function App() {
         value={count}
       />
       <div className='text-white grid grid-cols-4 gap-[30px] text-center [&>div]:py-2 [&>div]:bg-[oklch(0.38_0_0)] '>
-        {/* <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>7</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>8</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>9</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>÷</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>4</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>5</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>6</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>×</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>1</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>2</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>3</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>-</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>0</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>AC</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>=</button>
-        <button onClick={handleclick} className={`bg-gray-500 rounded-full`}>+</button> */}
         {keys.map((key) => (
           <CalcButton 
           key={key.label}
